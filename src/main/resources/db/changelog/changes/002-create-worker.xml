@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="1-create-worker" author="system">
+        <createTable tableName="worker">
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false" primaryKeyName="pk_worker"/>
+            </column>
+            <column name="first_name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="age" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="social_status" type="VARCHAR(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="party" type="VARCHAR(30)"/>
+            <column name="monthly_budget" type="NUMERIC(19,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="salary" type="NUMERIC(19,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="debt" type="NUMERIC(19,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="infected_until" type="TIMESTAMP WITHOUT TIME ZONE"/>
+        </createTable>
+
+        <createIndex tableName="worker" indexName="idx_worker_active">
+            <column name="active"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>

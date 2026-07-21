@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="4-create-session" author="system">
+        <createTable tableName="service_session">
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false" primaryKeyName="pk_session"/>
+            </column>
+            <column name="client_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="worker_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="room_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="start_time" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="end_time" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="duration_minutes" type="INT"/>
+            <column name="total_cost" type="NUMERIC(19,2)"/>
+            <column name="infected" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="service_session"
+                baseColumnNames="client_id"
+                referencedTableName="client"
+                referencedColumnNames="id"
+                constraintName="fk_session_client"
+                onDelete="CASCADE"/>
+
+        <addForeignKeyConstraint
+                baseTableName="service_session"
+                baseColumnNames="worker_id"
+                referencedTableName="worker"
+                referencedColumnNames="id"
+                constraintName="fk_session_worker"
+                onDelete="CASCADE"/>
+
+        <addForeignKeyConstraint
+                baseTableName="service_session"
+                baseColumnNames="room_id"
+                referencedTableName="room"
+                referencedColumnNames="id"
+                constraintName="fk_session_room"
+                onDelete="CASCADE"/>
+
+        <createIndex tableName="service_session" indexName="idx_session_client">
+            <column name="client_id"/>
+        </createIndex>
+
+        <createIndex tableName="service_session" indexName="idx_session_worker">
+            <column name="worker_id"/>
+        </createIndex>
+
+        <createIndex tableName="service_session" indexName="idx_session_room">
+            <column name="room_id"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>
