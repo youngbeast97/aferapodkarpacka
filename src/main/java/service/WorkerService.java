@@ -20,8 +20,8 @@ public class WorkerService {
 
     public WorkerResponse createWorker(WorkerRequest request) {
         Worker worker = workerMapper.toEntity(request);
-        Worker savedWorker = workerRepository.save(worker);
-        return workerMapper.toResponse(savedWorker);
+        Worker savedMyWorker = workerRepository.save(worker);
+        return workerMapper.toResponse(savedMyWorker);
     }
 
     public WorkerResponse getWorkerById(Long id) {
