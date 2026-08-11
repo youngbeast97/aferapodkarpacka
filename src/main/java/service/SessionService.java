@@ -94,7 +94,7 @@ public class SessionService {
         return sessionMapper.toResponse(session);
     }
 
-    public List<SessionResponse> getAllSessions() {
+    public List<SessionResponse> getAllSessionsInBurdel() {
         return sessionRepository.findAll()
                 .stream()
                 .map(sessionMapper::toResponse)

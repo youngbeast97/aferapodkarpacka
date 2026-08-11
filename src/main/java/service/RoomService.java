@@ -189,7 +189,7 @@ public class RoomService {
         return roomMapper.toResponse(room);
     }
 
-    public void deleteRoom(Long id) {
+    public void deleteThisRoom(Long id) {
         Room room = findRoomById(id);
 
         if (room.isOccupied()) {

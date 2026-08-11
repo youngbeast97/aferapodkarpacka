@@ -37,7 +37,7 @@ public class WorkerService {
                 .toList();
     }
 
-    public WorkerResponse updateWorker(Long id, WorkerRequest request) {
+    public WorkerResponse updateMyWorker(Long id, WorkerRequest request) {
         Worker worker = workerRepository.findById(id)
                 .orElseThrow(() -> new WorkerNotFoundException("not found"));
 
