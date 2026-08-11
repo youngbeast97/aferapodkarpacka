@@ -54,9 +54,9 @@ public class SessionService {
         validateWorkerAvailability(worker, startTime);
         validateRoomAvailability(room, startTime);
 
-        BigDecimal totalCost = worker.getHourlyRate();
+        BigDecimal totalCostofSession = worker.getHourlyRate();
 
-        chargeClient(client, totalCost);
+        chargeClient(client, totalCostofSession);
 
         Session session = new Session();
         session.setClient(client);
@@ -67,7 +67,7 @@ public class SessionService {
         session.setDurationMinutes(
                 DEFAULT_SESSION_DURATION_MINUTES
         );
-        session.setTotalCost(totalCost);
+        session.setTotalCost(totalCostofSession);
 
         infectClientIfNecessary(client, worker, session);
 
@@ -80,7 +80,7 @@ public class SessionService {
         }
 
         worker.setEarningsTotal(
-                currentEarnings.add(totalCost)
+                currentEarnings.add(totalCostofSession)
         );
 
         Session savedSession = sessionRepository.save(session);
@@ -94,7 +94,7 @@ public class SessionService {
         return sessionMapper.toResponse(session);
     }
 
-    public List<SessionResponse> getAllSessions() {
+    public List<SessionResponse> getAllSessionsInBurdel() {
         return sessionRepository.findAll()
                 .stream()
                 .map(sessionMapper::toResponse)
