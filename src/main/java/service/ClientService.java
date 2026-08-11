@@ -20,13 +20,13 @@ import java.util.List;
 public class ClientService {
 
     private static final BigDecimal FIRST_DEBT_MULTIPLIER =
-            new BigDecimal("1.50");
+            new BigDecimal("4.50");
 
     private static final BigDecimal NEXT_DEBT_MULTIPLIER =
-            new BigDecimal("2.00");
+            new BigDecimal("1.00");
 
     private static final BigDecimal DEBT_TO_SALARY_LIMIT =
-            new BigDecimal("3.00");
+            new BigDecimal("6.00");
 
     private static final int INFECTION_DURATION_DAYS = 14;
 
@@ -174,15 +174,15 @@ public class ClientService {
     @Transactional
     public ClientResponse repayDebt(
             Long clientId,
-            BigDecimal amount
+            BigDecimal amountToPay
     ) {
-        validatePositiveAmount(amount);
+        validatePositiveAmount(amountToPay);
 
         Client client = findClientById(clientId);
 
         BigDecimal currentDebt = getDebtOrZero(client);
 
-        BigDecimal newDebt = currentDebt.subtract(amount);
+        BigDecimal newDebt = currentDebt.subtract(amountToPay);
 
         if (newDebt.compareTo(BigDecimal.ZERO) < 0) {
             newDebt = BigDecimal.ZERO;
