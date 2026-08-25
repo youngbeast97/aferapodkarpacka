@@ -106,13 +106,8 @@ public class SessionService {
     ) {
         findClientById(clientId);
 
-        return sessionRepository.findAll()
+        return sessionRepository.findByClientId(clientId)
                 .stream()
-                .filter(session ->
-                        session.getClient()
-                                .getId()
-                                .equals(clientId)
-                )
                 .map(sessionMapper::toResponse)
                 .toList();
     }
@@ -122,13 +117,8 @@ public class SessionService {
     ) {
         findWorkerById(workerId);
 
-        return sessionRepository.findAll()
+        return sessionRepository.findByWorkerId(workerId)
                 .stream()
-                .filter(session ->
-                        session.getWorker()
-                                .getId()
-                                .equals(workerId)
-                )
                 .map(sessionMapper::toResponse)
                 .toList();
     }
@@ -138,21 +128,15 @@ public class SessionService {
     ) {
         findRoomById(roomId);
 
-        return sessionRepository.findAll()
+        return sessionRepository.findByRoomId(roomId)
                 .stream()
-                .filter(session ->
-                        session.getRoom()
-                                .getId()
-                                .equals(roomId)
-                )
                 .map(sessionMapper::toResponse)
                 .toList();
     }
 
     public List<SessionResponse> getInfectedSessions() {
-        return sessionRepository.findAll()
+        return sessionRepository.findByInfectedTrue()
                 .stream()
-                .filter(Session::isInfected)
                 .map(sessionMapper::toResponse)
                 .toList();
     }
@@ -205,22 +189,11 @@ public class SessionService {
             Room room = session.getRoom();
 
             boolean anotherActiveSessionExists =
-                    sessionRepository.findAll()
-                            .stream()
-                            .filter(otherSession ->
-                                    !otherSession.getId()
-                                            .equals(session.getId())
-                            )
-                            .filter(otherSession ->
-                                    otherSession.getRoom()
-                                            .getId()
-                                            .equals(room.getId())
-                            )
-                            .anyMatch(otherSession ->
-                                    otherSession.getEndTime() != null
-                                            && otherSession.getEndTime()
-                                            .isAfter(now)
-                            );
+                    sessionRepository.existsByRoomIdAndIdNotAndEndTimeAfter(
+                            room.getId(),
+                            session.getId(),
+                            now
+                    );
 
             if (!anotherActiveSessionExists) {
                 room.setOccupied(false);
@@ -282,18 +255,10 @@ public class SessionService {
             LocalDateTime startTime
     ) {
         boolean workerHasActiveSession =
-                sessionRepository.findAll()
-                        .stream()
-                        .filter(session ->
-                                session.getWorker()
-                                        .getId()
-                                        .equals(worker.getId())
-                        )
-                        .anyMatch(session ->
-                                session.getEndTime() != null
-                                        && session.getEndTime()
-                                        .isAfter(startTime)
-                        );
+                sessionRepository.existsByWorkerIdAndEndTimeAfter(
+                        worker.getId(),
+                        startTime
+                );
 
         if (workerHasActiveSession) {
             throw new IllegalStateException(
@@ -309,18 +274,10 @@ public class SessionService {
             LocalDateTime startTime
     ) {
         boolean roomHasActiveSession =
-                sessionRepository.findAll()
-                        .stream()
-                        .filter(session ->
-                                session.getRoom()
-                                        .getId()
-                                        .equals(room.getId())
-                        )
-                        .anyMatch(session ->
-                                session.getEndTime() != null
-                                        && session.getEndTime()
-                                        .isAfter(startTime)
-                        );
+                sessionRepository.existsByRoomIdAndEndTimeAfter(
+                        room.getId(),
+                        startTime
+                );
 
         if (roomHasActiveSession) {
             throw new IllegalStateException(

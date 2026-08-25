@@ -25,8 +25,7 @@ public class WorkerService {
     }
 
     public WorkerResponse getWorkerById(Long id) {
-        Worker worker = workerRepository.findById(id)
-                .orElseThrow(() -> new WorkerNotFoundException("not found"));
+        Worker worker = findWorkerById(id);
         return workerMapper.toResponse(worker);
     }
 
@@ -38,8 +37,7 @@ public class WorkerService {
     }
 
     public WorkerResponse updateWorker(Long id, WorkerRequest request) {
-        Worker worker = workerRepository.findById(id)
-                .orElseThrow(() -> new WorkerNotFoundException("not found"));
+        Worker worker = findWorkerById(id);
 
         workerMapper.updateEntity(request, worker);
         Worker savedWorker = workerRepository.save(worker);
@@ -47,9 +45,13 @@ public class WorkerService {
     }
 
     public void deleteWorker(Long id) {
-        Worker worker = workerRepository.findById(id)
-                .orElseThrow(() -> new WorkerNotFoundException("not found"));
+        Worker worker = findWorkerById(id);
 
         workerRepository.delete(worker);
+    }
+
+    private Worker findWorkerById(Long id) {
+        return workerRepository.findById(id)
+                .orElseThrow(() -> new WorkerNotFoundException("not found"));
     }
 }

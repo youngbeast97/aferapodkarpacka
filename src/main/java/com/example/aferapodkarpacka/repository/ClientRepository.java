@@ -1,9 +1,9 @@
-package repository;
+package com.example.aferapodkarpacka.repository;
 
 
-import model.client.Client;
-import model.enums.PoliticalParty;
-import model.enums.SocialStatus;
+import com.example.aferapodkarpacka.model.client.Client;
+import com.example.aferapodkarpacka.model.enums.PoliticalParty;
+import com.example.aferapodkarpacka.model.enums.SocialStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.math.BigDecimal;

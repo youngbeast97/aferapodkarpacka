@@ -42,51 +42,43 @@ public class RoomService {
     }
 
     public List<RoomResponse> getAvailableRooms() {
-        return roomRepository.findAll()
+        return roomRepository.findByOccupiedFalse()
                 .stream()
-                .filter(room -> !room.isOccupied())
                 .map(roomMapper::toResponse)
                 .toList();
     }
 
     public List<RoomResponse> getOccupiedRooms() {
-        return roomRepository.findAll()
+        return roomRepository.findByOccupiedTrue()
                 .stream()
-                .filter(Room::isOccupied)
                 .map(roomMapper::toResponse)
                 .toList();
     }
 
     public List<RoomResponse> getMonitoredRooms() {
-        return roomRepository.findAll()
+        return roomRepository.findByMonitoredTrue()
                 .stream()
-                .filter(Room::isMonitored)
                 .map(roomMapper::toResponse)
                 .toList();
     }
 
     public List<RoomResponse> getUnmonitoredRooms() {
-        return roomRepository.findAll()
+        return roomRepository.findByMonitoredFalse()
                 .stream()
-                .filter(room -> !room.isMonitored())
                 .map(roomMapper::toResponse)
                 .toList();
     }
 
     public List<RoomResponse> getAvailableMonitoredRooms() {
-        return roomRepository.findAll()
+        return roomRepository.findByOccupiedFalseAndMonitoredTrue()
                 .stream()
-                .filter(room -> !room.isOccupied())
-                .filter(Room::isMonitored)
                 .map(roomMapper::toResponse)
                 .toList();
     }
 
     public List<RoomResponse> getAvailableUnmonitoredRooms() {
-        return roomRepository.findAll()
+        return roomRepository.findByOccupiedFalseAndMonitoredFalse()
                 .stream()
-                .filter(room -> !room.isOccupied())
-                .filter(room -> !room.isMonitored())
                 .map(roomMapper::toResponse)
                 .toList();
     }
