@@ -1,18 +1,18 @@
 package com.example.aferapodkarpacka.service;
 
-import exceptions.RoomNotFoundException;
-import model.room.Room;
-import model.room.RoomMapper;
-import model.room.RoomRequest;
-import model.room.RoomResponse;
+import com.example.aferapodkarpacka.exceptions.RoomNotFoundException;
+import com.example.aferapodkarpacka.model.room.Room;
+import com.example.aferapodkarpacka.model.room.RoomMapper;
+import com.example.aferapodkarpacka.model.room.RoomRequest;
+import com.example.aferapodkarpacka.model.room.RoomResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import repository.RoomRepository;
-import service.RoomService;
+import com.example.aferapodkarpacka.repository.RoomRepository;
+import com.example.aferapodkarpacka.service.RoomService;
 
 import java.util.List;
 import java.util.Optional;

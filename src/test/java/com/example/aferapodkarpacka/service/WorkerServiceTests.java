@@ -1,18 +1,18 @@
 package com.example.aferapodkarpacka.service;
 
-import exceptions.WorkerNotFoundException;
-import model.worker.Worker;
-import model.worker.WorkerMapper;
-import model.worker.WorkerRequest;
-import model.worker.WorkerResponse;
+import com.example.aferapodkarpacka.exceptions.WorkerNotFoundException;
+import com.example.aferapodkarpacka.model.worker.Worker;
+import com.example.aferapodkarpacka.model.worker.WorkerMapper;
+import com.example.aferapodkarpacka.model.worker.WorkerRequest;
+import com.example.aferapodkarpacka.model.worker.WorkerResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import repository.WorkerRepository;
-import service.WorkerService;
+import com.example.aferapodkarpacka.repository.WorkerRepository;
+import com.example.aferapodkarpacka.service.WorkerService;
 import java.util.List;
 import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
