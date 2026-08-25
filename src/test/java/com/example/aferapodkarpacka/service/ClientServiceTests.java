@@ -1,18 +1,18 @@
 package com.example.aferapodkarpacka.service;
 
 import com.example.aferapodkarpacka.model.client.ClientMapper;
-import exceptions.ClientNotFoundException;
-import model.client.Client;
-import model.client.ClientRequest;
-import model.client.ClientResponse;
+import com.example.aferapodkarpacka.exceptions.ClientNotFoundException;
+import com.example.aferapodkarpacka.model.client.Client;
+import com.example.aferapodkarpacka.model.client.ClientRequest;
+import com.example.aferapodkarpacka.model.client.ClientResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import repository.ClientRepository;
-import service.ClientService;
+import com.example.aferapodkarpacka.repository.ClientRepository;
+import com.example.aferapodkarpacka.service.ClientService;
 
 import java.util.List;
 import java.util.Optional;
