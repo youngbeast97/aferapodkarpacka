@@ -1,28 +1,28 @@
 package com.example.aferapodkarpacka.service;
 
 
-import exceptions.ClientNotFoundException;
-import exceptions.RoomNotFoundException;
-import exceptions.SessionNotFoundException;
-import exceptions.WorkerNotFoundException;
-import model.client.Client;
-import model.room.Room;
-import model.session.Session;
-import model.session.SessionMapper;
-import model.session.SessionRequest;
-import model.session.SessionResponse;
-import model.worker.Worker;
+import com.example.aferapodkarpacka.exceptions.ClientNotFoundException;
+import com.example.aferapodkarpacka.exceptions.RoomNotFoundException;
+import com.example.aferapodkarpacka.exceptions.SessionNotFoundException;
+import com.example.aferapodkarpacka.exceptions.WorkerNotFoundException;
+import com.example.aferapodkarpacka.model.client.Client;
+import com.example.aferapodkarpacka.model.room.Room;
+import com.example.aferapodkarpacka.model.session.Session;
+import com.example.aferapodkarpacka.model.session.SessionMapper;
+import com.example.aferapodkarpacka.model.session.SessionRequest;
+import com.example.aferapodkarpacka.model.session.SessionResponse;
+import com.example.aferapodkarpacka.model.worker.Worker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import repository.ClientRepository;
-import repository.RoomRepository;
-import repository.SessionRepository;
-import repository.WorkerRepository;
-import service.SessionService;
+import com.example.aferapodkarpacka.repository.ClientRepository;
+import com.example.aferapodkarpacka.repository.RoomRepository;
+import com.example.aferapodkarpacka.repository.SessionRepository;
+import com.example.aferapodkarpacka.repository.WorkerRepository;
+import com.example.aferapodkarpacka.service.SessionService;
 
 import java.math.BigDecimal;
 import java.util.Optional;
